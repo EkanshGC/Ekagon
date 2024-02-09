@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+
+{% block content %}
+<h1 style="font-size: 8rem; color: rgb(0, 0, 0);">Welcome to Ekagon!</h1>
+  <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
+  <br>
+  <div style="display:flex; flex-direction: row;">
+  <a href="{% url 'login' %}" style="margin-right: 0.5rem"><button class="btn btn-primary">Login</button></a>
+  <a href="{% url 'signup' %}" style="margin-left: 0.5rem"><button class="btn btn-primary">Sign Up</button></a>
+  </div>
+{% endblock content %}
