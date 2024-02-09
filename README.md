@@ -1,4 +1,5 @@
 # Ekagon
-is the best more stuff
 
-- [ ] things to do
+A nice cool Amazon like Ecommerce website.
+
+build by a ten year old!
