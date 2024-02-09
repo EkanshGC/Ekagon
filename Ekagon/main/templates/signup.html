@@ -2,17 +2,63 @@
 
 {% block title %}Sign Up{% endblock title %}
 
-
 {% block content %}
-<h1>Sign Up</h1>
+<style>
+    .form-container {
+        width: 50%;
+        margin: 0 auto;
+    }
+    .form-container form {
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    .form-container label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .form-container input[type="submit"],
+    .form-container button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .form-container .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+    }
+</style>
 
-<form action="{% url 'signup' %}" method="post">
-    {% csrf_token %}
-    <input type="text" name="username">
-    <input type="email" name="email">
-    <input type="password" name="password">
-    <input type="password" name="password_confirm">
-    <input type="submit" value="post">
-</form>
-<a href="{% url 'index' %}"><button>Back</button></a>
+<div class="form-container">
+    <h1>Sign Up</h1>
+
+    <form action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" name="username">
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" name="email">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password">
+        <br>
+        <label for="password_confirm">Password Confirm:</label>
+        <input type="password" name="password_confirm">
+        <br>
+        <input type="submit" class="btn btn-success" value="Sign Up">
+    </form>
+    <a href="{% url 'index' %}"><button class="btn btn-secondary">Back</button></a>
+</div>
 {% endblock content %}

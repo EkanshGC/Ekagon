@@ -8,10 +8,13 @@
 
 <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
+    <label for="username">Username:</label>
     <input type="text" name="username">
-    <input type="email" name="email">
+    <br>
+    <label for="password">Password:</label>
     <input type="password" name="password">
-    <input type="submit" value="post">
+    <br>
+    <input type="submit" value="Login In" class="btn btn-success">
 </form>
-<a href="{% url 'index' %}"><button>Back</button></a>
+<a href="{% url 'index' %}"><button class="btn btn-secondary">Back</button></a>
 {% endblock content %}
