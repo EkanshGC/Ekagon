@@ -1,0 +1,51 @@
+<!-- Assume this is your listings.html template -->
+{% extends "base.html" %}
+
+{% block title %}Listings{% endblock title %}
+
+{% block extra_css %}
+<style>
+
+.listing-card {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    width: 200px;
+}
+
+.card-title {
+    margin-right: 20px;
+}
+
+.listing-card:hover {
+    transform: scale(1.05); /* Increase size by 5% */
+}
+
+.card-img-top {
+    padding: 10px;
+}
+
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+  <h1>Listings</h1>
+  {% if listings %}
+    <div class="row">
+      {% for listing in listings %}
+        <div class="col-md-4 ">
+          <a href="{% url 'listing' listing_id=listing.id %}" class="card mb-4 box-shadow listing-card" style="text-decoration: none;">
+            <img class="card-img-top" src="{{ listing.image }}" alt="{{ listing.title }}">
+              <h2 class="card-title">{{ listing.title }}</h2>
+              <div>
+              <p class="card-text">Seller: {{ listing.seller }}</p>
+              <p class="card-text">Price: ${{ listing.price }}</p>
+              </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No listings available.</p>
+  {% endif %}
+{% endblock %}

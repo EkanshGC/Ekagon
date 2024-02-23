@@ -2,4 +2,8 @@
 
 A nice cool Amazon like Ecommerce website.
 
-build by a ten year old!
+
+# bugs to fix
+
+- Say username or passw incorrect when login in failed.
+- add some error checking

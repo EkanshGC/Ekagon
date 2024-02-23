@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 
 
-from .models import User
+from .models import User, Listing
 
 
 def index(request):
@@ -48,3 +48,16 @@ def sign_up(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+
+def listings(request):
+    listings = Listing.objects.all()
+    return render(request, "listings.html", {
+        "listings": listings,
+    })
+
+def listing(request, listing_id):
+    listing = Listing.objects.filter(id=listing_id).first()
+    return render(request, "listing.html", {
+        "listing": listing,
+    })

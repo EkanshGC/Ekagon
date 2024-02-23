@@ -8,13 +8,15 @@
   {% if user.is_authenticated %}
   <p style="font-size:2rem">Welcome, {{ user.get_username }}.</p>
   <div style="display:flex; flex-direction: row;">
-    <a href="{% url 'logout' %}" style="margin-right: 0.5rem"><button class="btn btn-primary">Logout</button></a>
+    <a href="{% url 'logout' %}" style="margin-right: 1rem;"><button style="width:7rem; height:4rem; font-size: 1.5rem; border-radius: 1rem;" class="btn btn-primary">Logout</button></a>
+    <a href="{% url 'listings' %}" style="margin-left: 1rem"><button style="width:7rem; height:4rem; font-size: 1.5rem; border-radius: 1rem;" class="btn btn-primary">Listings</button></a>
     </div>
   {% else %}
   <br>  
     <div style="display:flex; flex-direction: row;">
     <a href="{% url 'login' %}" style="margin-right: 1rem;"><button style="width:7rem; height:4rem; font-size: 1.5rem; border-radius: 1rem;" class="btn btn-primary">Login</button></a>
     <a href="{% url 'signup' %}" style="margin-left: 1rem"><button style="width:7rem; height:4rem; font-size: 1.5rem; border-radius: 1rem;" class="btn btn-primary">Sign Up</button></a>
+    <a href="{% url 'listings' %}" style="margin-left: 1rem"><button style="width:7rem; height:4rem; font-size: 1.5rem; border-radius: 1rem;" class="btn btn-primary">Listings</button></a>
     </div>
   {% endif %}
 {% endblock content %}
