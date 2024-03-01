@@ -13,6 +13,7 @@ class Listing(models.Model):
     price = models.IntegerField(default=10)
     seller = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    available = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.title} - {self.description[:20]}...'

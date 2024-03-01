@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+
 
 from django.contrib.auth import authenticate, login, logout
 
@@ -61,3 +63,17 @@ def listing(request, listing_id):
     return render(request, "listing.html", {
         "listing": listing,
     })
+
+
+@login_required
+def create(request):
+    if request.method == "POST":
+        title = request.POST["title"]
+        description = request.POST["description"]
+        image = request.POST["image"]
+        price = request.POST["price"]
+
+        listing = Listing(title=title, description=description, image=image, price=price, seller=request.user)
+        listing.save()
+        return HttpResponseRedirect(reverse("listing", args=[listing.id]))
+    return render(request, "create.html")
