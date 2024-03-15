@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Listings{% endblock title %}
+{% block title %}listings{% endblock title %}
 
 {% block extra_css %}
 <style>
@@ -20,7 +20,7 @@
   }
 
   .listing-card:hover {
-    transform: scale(1.05); /* Increase size by 5% */
+    transform: scale(1.05); /* increase size by 5% */
   }
 
   .card-img-top {
@@ -43,22 +43,31 @@
     margin-top: 20px;
   }
 
-  /* Style for container to ensure scrolling */
+  /* style for container to ensure scrolling */
   .content-container {
-    max-height: calc(100vh - 100px); /* Adjust according to your header/footer height */
+    max-height: calc(100vh - 100px); /* adjust according to your header/footer height */
     overflow-y: auto;
   }
 
-  /* Style for transparent card when not available */
+  /* style for transparent card when not available */
   .listing-card.not-available {
-    opacity: 0.5; /* Adjust opacity as needed */
+    opacity: 0.5; /* adjust opacity as needed */
   }
 </style>
 {% endblock extra_css %}
 
 {% block content %}
-  <div class="container content-container"> <!-- Wrap content in container with scrolling -->
-    <h1>Listings</h1>
+  <div class="container content-container"> <!-- wrap content in container with scrolling -->
+    <h1>listings</h1>
+    <form action="{% url 'search' %}" method="post" class="mb-4">
+      {% csrf_token %}
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" name="search">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
     {% if listings %}
       <div class="row row-cols-1 row-cols-md-3">
         {% for listing in listings %}
@@ -67,16 +76,16 @@
               <img class="card-img-top" src="{{ listing.image }}" alt="{{ listing.title }}">
               <div class="card-body">
                 <h2 class="card-title">{{ listing.title }}</h2>
-                <p class="card-text">Seller: {{ listing.seller }}</p>
-                <p class="card-text">Price: ${{ listing.price }}</p>
+                <p class="card-text">seller: {{ listing.seller }}</p>
+                <p class="card-text">price: ${{ listing.price }}</p>
               </div>
             </a>
           </div>
         {% endfor %}
       </div>
     {% else %}
-      <p>No listings available.</p>
+      <p>no listings available.</p>
     {% endif %}
   </div>
-  <a href="{% url 'index' %}" class="btn btn-secondary back-btn">Back</a>
+  <a href="{% url 'index' %}" class="btn btn-secondary back-btn">back</a>
 {% endblock %}

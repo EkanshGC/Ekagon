@@ -3,71 +3,37 @@
 {% block title %}Login{% endblock title %}
 
 {% block extra_css %}
-<style>
-    /* Custom CSS for login form */
-    .login-container {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-    }
-
-    .login-container h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .login-container label {
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .login-container input[type="text"],
-    .login-container input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-
-    .login-container input[type="submit"],
-    .login-container button {
-        width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #4caf50;
-        color: white;
-        cursor: pointer;
-    }
-
-    .login-container input[type="submit"]:hover,
-    .login-container button:hover {
-        background-color: #45a049;
-    }
-
-    .login-container .back-btn {
-        display: inline-block;
-        margin-top: 10px;
-    }
-</style>
+<!-- No custom CSS needed -->
 {% endblock extra_css %}
 
 {% block content %}
-<div class="login-container">
-    <h1>Login</h1>
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" name="username">
-        <label for="password">Password:</label>
-        <input type="password" name="password">
-        <input type="submit" value="Login" class="btn btn-success">
-    </form>
-    <a href="{% url 'index' %}" class="back-btn btn btn-secondary">Back</a>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">Login</h1>
+                    {% if message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endif %}
+                    <form action="{% url 'login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username:</label>
+                            <input type="text" class="form-control" name="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Login</button>
+                    </form>
+                    <a href="{% url 'index' %}" class="btn btn-danger btn-block mt-3">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}

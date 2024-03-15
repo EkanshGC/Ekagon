@@ -23,8 +23,10 @@ def login_view(request):
         if user != None:
             login(request, user)
         
-        return HttpResponseRedirect(reverse('index'))
-
+            return HttpResponseRedirect(reverse('index'))
+        return render(request, "login.html", {
+            "message": "This user doesn't exist! Try again."
+        })
 
     return render(request, "login.html")
 
@@ -35,13 +37,31 @@ def sign_up(request):
         password = request.POST["password"]
         password_confirm = request.POST["password_confirm"]
         email = request.POST["email"]
-        print('asdhuashd')
+
+        # Kaito Protection
+        if len(username) > 8:
+            return render(request, "signup.html", {
+                 "message": "Username Too Long"
+             })                
+
+        if password == "":
+           return render(request, "signup.html", {
+                 "message": "Please choose a password!"
+             })    
+        if email == "":
+           return render(request, "signup.html", {
+                 "message": "Please add an email id!"
+             })    
 
         if password == password_confirm:
-            print('pass wo')
-            user = User.objects.create_user(username=username, email=email, password=password)
-            user.save()
-            login(request, user)
+            try:
+                user = User.objects.create_user(username=username, email=email, password=password)
+                user.save()
+                login(request, user)
+            except:
+                return render(request, "signup.html", {
+                    "message": "Username Taken!"
+                })                
             return HttpResponseRedirect(reverse("index"))
 
     return render(request, "signup.html")
@@ -74,6 +94,27 @@ def create(request):
         description = request.POST["description"]
         image = request.POST["image"]
         price = request.POST["price"]
+        if len(title) > 15:
+            return render(request, "create.html", {
+                "message": "Title too long!"
+            })
+
+        if description == "":
+            return render(request, "create.html", {
+                "message": "Please enter a description."
+            })
+        
+        if image == "":
+            return render(request, "create.html", {
+                "message": "Please put an image url"
+            })
+        
+
+        if price == "":
+            return render(request, "create.html", {
+                "message": "Please enter a price"
+            })
+
         try:
             listing = Listing(title=title, description=description, image=image, price=price, seller=request.user)
             listing.save()
@@ -105,4 +146,16 @@ def buy(request, listing_id):
         "id": listing_id,
         "price": listing.price,
         })
-    
+
+
+def search(request):
+    listings_un = Listing.objects.all()
+    string = request.POST.get("search", "")
+    listings = []
+    for listing in listings_un:
+        if string.lower() in listing.title.lower():
+            listings.append(listing)
+
+    return render(request, "listings.html", {
+        "listings": listings,
+    })

@@ -3,62 +3,41 @@
 {% block title %}Sign Up{% endblock title %}
 
 {% block content %}
-<style>
-    .form-container {
-        width: 50%;
-        margin: 0 auto;
-    }
-    .form-container form {
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-    }
-    .form-container label {
-        display: block;
-        margin-bottom: 10px;
-    }
-    .form-container input[type="text"],
-    .form-container input[type="email"],
-    .form-container input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    .form-container input[type="submit"],
-    .form-container button {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .form-container .btn-secondary {
-        background-color: #6c757d;
-        color: #fff;
-    }
-</style>
-
-<div class="form-container">
-    <h1>Sign Up</h1>
-
-    <form action="{% url 'signup' %}" method="post">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" name="username">
-        <br>
-        <label for="email">Email:</label>
-        <input type="email" name="email">
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" name="password">
-        <br>
-        <label for="password_confirm">Password Confirm:</label>
-        <input type="password" name="password_confirm">
-        <br>
-        <input type="submit" class="btn btn-success" value="Sign Up">
-    </form>
-    <a href="{% url 'index' %}"><button class="btn btn-secondary">Back</button></a>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">Sign Up</h1>
+                        {% if message %}
+                            <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                            </div>
+                        {% endif %}
+                    <form action="{% url 'signup' %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username:</label>
+                            <input type="text" class="form-control" name="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" name="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password_confirm" class="form-label">Password Confirm:</label>
+                            <input type="password" class="form-control" name="password_confirm">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Sign Up</button>
+                    </form>
+                    <a href="{% url 'index' %}" class="btn btn-danger btn-block mt-3">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}
